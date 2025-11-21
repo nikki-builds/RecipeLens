@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -9,23 +9,31 @@ const api = axios.create({
   },
 });
 
-export const parseRecipe = async (recipeText) => {
-  const response = await api.post('/recipes/parse', { recipeText });
+// backend POST /api/recipes/analyze 
+// this one endpoint does all of parsing + nutrition calculation + saving
+export const analyzeRecipe = async (recipeText, name = '', servings = 1) => {
+  const response = await api.post('/api/recipes/analyze', { 
+    recipeText,
+    name,
+    servings });
   return response.data;
 };
 
-export const saveRecipe = async (recipeData) => {
-  const response = await api.post('/recipes/save', recipeData);
+// backend GET /api/recipes - calling all saved recipes
+export const getAllRecipes = async () => {
+  const response = await api.get('/api/recipes/');
   return response.data;
 };
 
-export const getRecipes = async () => {
-  const response = await api.get('/recipes');
+// backend GET /api/recipes/:id - calling a certain, specific recipe
+export const getRecipeById = async (id) => {
+  const response = await api.get(`/api/recipes/${id}`);
   return response.data;
 };
 
-export const searchFoods = async (query) => {
-  const response = await api.get(`/foods/search?q=${query}`);
+// Health check (for testing connection to backend)
+export const checkHealth = async () => {
+  const response = await api.get('/api/health');
   return response.data
 };
 

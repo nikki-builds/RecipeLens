@@ -58,8 +58,33 @@ async function findMatchingFood(ingredientName) {
  * @return {number} - Grams
  */
 
-function convertToGrams(quantity, unit) {
+// actual weight for each ingredient(1 whole, 1 slice)
+const FOOD_ITEM_WEIGHTS = {
+  'egg': 50,
+  'eggs': 50,
+  'whole egg': 50,
+  'banana': 118,
+  'bananas': 118,
+  'apple': 182,
+  'apples': 182,
+  'bread': 30,
+  'slice of bread': 30,
+  'cheddar cheese': 28,
+  'slice of cheese': 28,
+  'cheddar': 28,
+  'cheese': 28,
+  // add as needed
+};
+
+function convertToGrams(quantity, unit, ingredientName) {
   const unitLower = unit.toLowerCase();
+
+  if(unitLower === "whole" || unitLower === "piece" || unitLower === "slice") {
+    const foodName = ingredientName.toLowerCase();
+    const itemWeight = FOOD_ITEM_WEIGHTS[foodName] || 100; 
+    return quantity * itemWeight; 
+  }
+
   const conversionFactor = UNIT_CONVERSIONS[unitLower] || 100;
   return quantity * conversionFactor;
 }
@@ -72,14 +97,18 @@ function convertToGrams(quantity, unit) {
  */
 
 function calculateIngredientNutrition(ingredient, foodData) {
-  const grams = convertToGrams(ingredient.quantity, ingredient.unit);
+  const grams = convertToGrams(
+    ingredient.quantity, 
+    ingredient.unit,
+    ingredient.ingredient);
   
   // Food data is per 100g. so scale it 
-  const scaleFactor = grams / foodData.servingSize;
+  const scaleFactor = grams / 100;
 
   return {
-    ingredient: ingredient.ingredient,
-    quantity: ingredient.quantity,
+    foodId: foodData._Id,
+    name: ingredient.ingredient,
+    amount: ingredient.quantity,
     unit: ingredient.unit,
     grams: Math.round(grams),
     matched: true,
@@ -99,6 +128,8 @@ function calculateIngredientNutrition(ingredient, foodData) {
  */
 async function calculateRecipeNutrition(parsedIngredients) {
   const results = [];
+  let matchedCount = 0;
+
   const totals = {
     calories: 0,
     protein: 0,
@@ -115,6 +146,7 @@ async function calculateRecipeNutrition(parsedIngredients) {
     // console.log('foodData:', foodData);
 
     if (foodData) {
+      matchedCount++;
       // calculate nutrition for this ingredient
       const ingredientResult = calculateIngredientNutrition(ingredient, foodData);
 
@@ -132,8 +164,8 @@ async function calculateRecipeNutrition(parsedIngredients) {
     } else {
       // ingredient not found in database
       results.push({
-        ingredient: ingredient.ingredient,
-        quantity: ingredient.quantity,
+        name: ingredient.ingredient,
+        amount: ingredient.quantity,
         unit: ingredient.unit,
         matched: false,
         error: 'Not found in database'
@@ -141,7 +173,12 @@ async function calculateRecipeNutrition(parsedIngredients) {
     }
   }
 
-  // Round totals
+  // check right after looping
+  if (matchedCount === 0) {
+    throw new Error('NUTRITION_ERROR: No ingredients found in database');
+  }
+
+  // matchedCount > 0, Round totals
   totals.protein = Math.round(totals.protein * 10)/ 10;
   totals.carbs = Math.round(totals.carbs * 10)/ 10;
   totals.fat = Math.round(totals.fat * 10)/ 10;
@@ -149,7 +186,7 @@ async function calculateRecipeNutrition(parsedIngredients) {
   return {
     ingredients: results,
     totals: totals,
-    matchedCount: results.filter(r => r.matched).length,
+    matchedCount,
     totalCount: results.length
   };
 
