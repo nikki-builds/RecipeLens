@@ -2,6 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Toaster, toast} from 'react-hot-toast';
 import { analyzeRecipe, getAllRecipes } from './services/api';
+import RecipeForm from './components/RecipeForm';
+import NutritionSummary from './components/NutritionSummary';
+import IngredientList from './components/IngredientList';
+import RecipeHistory from './components/RecipeHistory';
 
 
 
@@ -23,6 +27,9 @@ function App() {
       // call analyzeRecipe from api.js
       const result = await analyzeRecipe(recipeText, name, servings);
       setCurrentRecipe(result);
+
+      // console.log(result.data.ingredients);
+
       toast.success('Recipe analyzed successfully!');
 
       // now new recipe is saved, UPDATE savedRecpie
@@ -44,6 +51,7 @@ function App() {
 
   // RecipeHistory dropdown 
   const fetchSavedRecipes = async ()=> {
+    //  console.log('🔍 fetchSavedRecipes');
     try {
       const recipes = await getAllRecipes();
       setSavedRecipes(recipes);
@@ -53,12 +61,31 @@ function App() {
     }
   };
 
+  // Load a saved recipe from history
+  const handleSelectRecipe = (recipe) => {
+    // transform saved recipe format to match currentRecipe format
+    const formattedRecipe = {
+      success: true,
+      data: {
+        recipeId: recipe._id,
+        name: recipe.name,
+        ingredients: recipe.ingredients,
+        totalNutrition: recipe.totalNutrition,
+        servings: recipe.servings,
+        matchedCount: recipe.ingredients.filter(i=> i.matched).length,
+        totalCount: recipe.ingredients.length
+      }
+    };
+    setCurrentRecipe(formattedRecipe);
+    toast.success('Recipe loaded!');
+  };
+
 
   return (
     <div className='min-h-screen bg-background'>
       <Toaster position="top-right" />
 
-      {/* Header - Dark 색상 사용 */}
+      {/* Header */}
       <header className='bg-dark shadow-lg border-b-2 border-primary'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4'>
           <div className='flex justify-between items-center'>
@@ -68,68 +95,57 @@ function App() {
             </h1>
 
             {/* RecipeHistory Dropdown */}
-            <button className='bg-light hover:bg-secondary text-dark px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2'>
+            <RecipeHistory
+            savedRecipes={savedRecipes}
+            onSelectRecipe={handleSelectRecipe}
+            onFetchRecipes={fetchSavedRecipes}
+            />
+             {/* what's above replaced the button below */}
+            {/* <button className='bg-light hover:bg-secondary text-dark px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2'>
               <span>My Recipes</span>
               <span className='bg-primary text-white px-2 py-0.5 rounded-full text-sm'>
                 {savedRecipes.length}
               </span>
-            </button>
+            </button> */}
           </div>
         </div>
       </header>
 
       {/* Main Content */}
       <main className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
-  <div className='flex flex-col lg:flex-row gap-8 justify-center items-center lg:items-start transition-all duration-500'>
+        <div className='flex flex-col lg:flex-row gap-8 justify-center items-center lg:items-start transition-all duration-500'>
     
-    {/* RecipeForm - 제자리 유지 */}
+    {/* RecipeForm Component */}
     <div className='w-full sm:w-[520px]'>
-      <div className='bg-white rounded-lg shadow-lg p-6 border-2 border-light'>
-        <h2 className='text-2xl font-semibold mb-4 text-dark'>
-          Analyze Recipe
-        </h2>
-        <div className='space-y-4'>
-          <p className='text-gray-600'>RecipeForm placeholder</p>
-          <button 
-            onClick={() => setCurrentRecipe({ test: 'data' })}
-            className='w-full bg-primary hover:bg-opacity-90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg'
-          >
-            Test: Analyze Recipe
-          </button>
-        </div>
-      </div>
+     <RecipeForm
+        onSubmit={handleAnalyzeRecipe}
+        loading={loading} 
+      />
     </div>
 
     {/* RecipeResults - Fade in only */}
     {currentRecipe && (
-      <div className='w-full sm:w-[520px] animate-slideInRight'>
-        <div className='bg-white rounded-lg shadow-lg p-6 border-2 border-light'>
+      <div className='w-full sm:w-[520px]'>
+    <div className={`bg-white rounded-lg shadow-lg p-6 border-2 border-light ${
+      'animate-slideInUp lg:animate-slideInRight'
+    }`}>
           <h2 className='text-2xl font-semibold mb-4 text-dark'>
             Nutrition Analysis
           </h2>
-          <div className='bg-secondary rounded-lg p-4 mb-4'>
-            <div className='grid grid-cols-2 gap-4'>
-              <div className='text-center'>
-                <p className='text-3xl font-bold text-primary'>320</p>
-                <p className='text-sm text-dark'>Calories</p>
-              </div>
-              <div className='text-center'>
-                <p className='text-3xl font-bold text-primary'>18g</p>
-                <p className='text-sm text-dark'>Protein</p>
-              </div>
-              <div className='text-center'>
-                <p className='text-3xl font-bold text-primary'>12g</p>
-                <p className='text-sm text-dark'>Carbs</p>
-              </div>
-              <div className='text-center'>
-                <p className='text-3xl font-bold text-primary'>20g</p>
-                <p className='text-sm text-dark'>Fat</p>
-              </div>
-            </div>
-          </div>
-          <pre className='mt-4 text-xs bg-light p-3 rounded overflow-auto max-h-60'>
-            {JSON.stringify(currentRecipe, null, 2)}
-          </pre>
+
+          {/* NutritionSummary Component */}
+          <NutritionSummary
+            calories={currentRecipe.data.totalNutrition.calories}
+            protein={currentRecipe.data.totalNutrition.protein}
+            carbs={currentRecipe.data.totalNutrition.carbs}
+            fat={currentRecipe.data.totalNutrition.fat} 
+          />
+
+          {/* IngredientList Component */}
+          <IngredientList
+            ingredients={currentRecipe.data.ingredients}
+          />
+
         </div>
       </div>
     )}

@@ -36,15 +36,18 @@ async function findMatchingFood(ingredientName) {
     let food = await Food.findOne({
       name: new RegExp(`^${ingredientName}$`, 'i')
     });
+          // 여기가 MongoDB query!!
+          // Food model = MongoDB's food collection
 
     // if no exact match, try partial match
     if (!food) {
       food = await Food.findOne({
         name: new RegExp(ingredientName, 'i')
       });
+          // again, MongoDB query!!
     }
 
-    return food;
+    return food; //  MongoDB에서 찾은 food 문서 반환
   } catch (error) {
     console.error(`Error finding food for "${ingredientName}":`, error);
     return null;

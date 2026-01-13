@@ -22,7 +22,7 @@ export const analyzeRecipe = async (recipeText, name = '', servings = 1) => {
 // backend GET /api/recipes - calling all saved recipes
 export const getAllRecipes = async () => {
   const response = await api.get('/api/recipes/');
-  return response.data;
+  return response.data.data;
 };
 
 // backend GET /api/recipes/:id - calling a certain, specific recipe
