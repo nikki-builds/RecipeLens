@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Toaster, toast} from 'react-hot-toast';
-import { analyzeRecipe, getAllRecipes } from './services/api';
+import { analyzeRecipe, getAllRecipes, saveRecipe } from './services/api';
 import RecipeForm from './components/RecipeForm';
 import NutritionSummary from './components/NutritionSummary';
 import IngredientList from './components/IngredientList';
@@ -16,6 +16,8 @@ function App() {
   const [ savedRecipes, setSavedRecipes ] = useState([]);
   // 3. loading status (spinner when being analyzed)
   const [ loading, setLoading ] = useState(false);
+  // ADDED 4. saved status (to show if current recipe is saved)
+  const [ isSaved, setIsSaved ] = useState(false);
 
   // Todo: add components and logic
 
@@ -27,13 +29,14 @@ function App() {
       // call analyzeRecipe from api.js
       const result = await analyzeRecipe(recipeText, name, servings);
       setCurrentRecipe(result);
+      setIsSaved(false); // NO more saving of newly analyzed recipes
 
       // console.log(result.data.ingredients);
 
       toast.success('Recipe analyzed successfully!');
 
       // now new recipe is saved, UPDATE savedRecpie
-      await fetchSavedRecipes();
+      // await fetchSavedRecipes(); // fetchSavedRecipes is removed since no saving 
 
     } catch (error) {
       console.error('Analysis failed:', error);
@@ -48,6 +51,39 @@ function App() {
       setLoading(false);
     }
   };
+
+  // ADDED: save current recipe to database
+  const handleSaveRecipe = async() => {
+    if (!currentRecipe) return;
+
+    console.log('💾 Saving recipe...');
+    console.log('currentRecipe:', currentRecipe);  // ← 추가!
+
+    try {
+      const recipeData = {
+        name: currentRecipe.data.name,
+        originalText: currentRecipe.data.originalText,
+        ingredients: currentRecipe.data.ingredients,
+        totalNutrition: currentRecipe.data.totalNutrition,
+        servings: currentRecipe.data.servings
+      };
+
+       console.log('recipeData:', recipeData);  // ← 추가!
+
+      const result = await saveRecipe(recipeData);
+
+      setIsSaved(true); // indicate saving complete
+      toast.success('Recipe saved successfully!');
+
+      // refresh saved recipe list
+      await fetchSavedRecipes();
+
+    } catch (error) {
+      console.error('Failed to save recipe:', error);
+      toast.error('Failed to save recipe. Please try again.');
+    }
+  };
+
 
   // RecipeHistory dropdown 
   const fetchSavedRecipes = async ()=> {
@@ -69,6 +105,7 @@ function App() {
       data: {
         recipeId: recipe._id,
         name: recipe.name,
+        originalText: recipe.originalText || '', // ADDED later
         ingredients: recipe.ingredients,
         totalNutrition: recipe.totalNutrition,
         servings: recipe.servings,
@@ -77,6 +114,7 @@ function App() {
       }
     };
     setCurrentRecipe(formattedRecipe);
+    setIsSaved(true); // ADDED later
     toast.success('Recipe loaded!');
   };
 
@@ -129,9 +167,25 @@ function App() {
     <div className={`bg-white rounded-lg shadow-lg p-6 border-2 border-light ${
       'animate-slideInUp lg:animate-slideInRight'
     }`}>
-          <h2 className='text-2xl font-semibold mb-4 text-dark'>
-            Nutrition Analysis
-          </h2>
+      {/* ADDED: Header with save button */}
+      <div className='flex justify-between items-center mb-4'>
+        <h2 className='text-2xl font-semibold text-dark'>
+          Nutrition Analysis
+        </h2>
+        
+        {/* Save Button - Improved */}
+        <button
+          onClick={handleSaveRecipe}
+          disabled={isSaved}
+          className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+            isSaved
+              ? 'bg-dark text-white cursor-not-allowed opacity-70'
+              : 'bg-primary hover:bg-opacity-90 text-white hover:shadow-lg'
+          }`}
+        >
+          {isSaved ? '✓ Saved' : 'Save'}
+        </button>
+      </div>  
 
           {/* NutritionSummary Component */}
           <NutritionSummary

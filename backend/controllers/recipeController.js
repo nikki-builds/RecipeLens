@@ -2,7 +2,7 @@ const openaiService = require("../services/openaiService");
 const nutritionService = require("../services/nutritionService");
 const Recipe = require("../models/Recipe");
 
-// Analyze recipe and calculate nutrition
+// Analyze recipe and calculate nutrition (NO SAVING)
 // route POST /api/recipes/analyze
 
 const analyzeRecipe = async (req,res) => {
@@ -12,7 +12,7 @@ const analyzeRecipe = async (req,res) => {
     // validation
     if(!recipeText || recipeText.trim().length === 0) {
       return res.status(400).json({
-        suceess: false,
+        success: false,
         error: 'Recipe text is required'
       });
     }
@@ -32,24 +32,27 @@ const analyzeRecipe = async (req,res) => {
     console.log('Calculating nutrition...');
     const nutritionData = await nutritionService.calculateRecipeNutrition(parsedIngredients);
 
-    // step: 3 Save to database
-    const recipe = await Recipe.create({
-      name: recipeName || 'Untitled Recipe',
-      originalText: recipeText,
-      ingredients: nutritionData.ingredients,
-      servings: servings || 1,
-      totalNutrition: nutritionData.totals,
-    });
+    // step: 3 Save to database. --> changed to NO SAVING
+    // user will click "SAVE" button to save
 
-    // step: 4 send response
-    res.status(201).json({
+    // const recipe = await Recipe.create({
+    //   name: recipeName || 'Untitled Recipe',
+    //   originalText: recipeText,
+    //   ingredients: nutritionData.ingredients,
+    //   servings: servings || 1,
+    //   totalNutrition: nutritionData.totals,
+    // });
+
+    // step: 4 send response (without saving)
+    res.status(200).json({
       success:true,
       data: {
-        recipeId: recipe._id,
-        name: recipe.name,
+        // recipeId: recipe._id, (removed b/c not saved yet)
+        name: recipeName || 'Untitled Recipe',
+        originalText: recipeText,
         ingredients: nutritionData.ingredients,
         totalNutrition: nutritionData.totals,
-        servings: recipe.servings,
+        servings: servings || 1,
         matchedCount: nutritionData.matchedCount,
         totalCount: nutritionData.totalCount,
       }
@@ -81,6 +84,54 @@ const analyzeRecipe = async (req,res) => {
   }
 };
 
+
+// Save analyzed recipe to database
+// route: POST/api/recipes/save
+const saveRecipe = async (req,res) => {
+  try {
+    const { name, originalText, ingredients, totalNutrition, servings} = req.body;
+
+    // validation
+    if(!ingredients || !totalNutrition) {
+      return res.status(400).json({
+        success: false,
+        error: 'Recipe data is required'
+      });
+    }
+    // check if matchedCount is 0
+    const matchedCount = ingredients.filter(i => i.matched).length;
+    if(matchedCount === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Cannot save recipe with no matched ingredients'
+      });
+    }
+
+    // save to database
+    const recipe = await Recipe.create({
+      name: name || 'Untitled Recipe',
+      originalText: originalText || '',
+      ingredients: ingredients,
+      servings: servings || 1,
+      totalNutrition: totalNutrition,
+    });
+
+    // send response
+    res.status(201).json({
+      success: true,
+      data: {
+        recipeId: recipe._id,
+        message: 'Recipe saved successfully!'
+      }
+    });
+  } catch (error) {
+    console.log('Error in saveRecipe:', error);
+    res.status(500).json({
+      success:false,
+      error: 'Failed to save recipe'
+    });
+  }
+};
 
 // Get recipe by ID
 // route: GET /api/recipes/:id
@@ -143,5 +194,6 @@ const getAllRecipes = async (req,res) => {
 module.exports = {
   analyzeRecipe,
   getRecipe,
+  saveRecipe,
   getAllRecipes
 };

@@ -10,14 +10,19 @@ const api = axios.create({
 });
 
 // backend POST /api/recipes/analyze 
-// this one endpoint does all of parsing + nutrition calculation + saving
+// this one endpoint does all of parsing + nutrition calculation 
 export const analyzeRecipe = async (recipeText, name = '', servings = 1) => {
   const response = await api.post('/api/recipes/analyze', { 
     recipeText,
-    name,
+    recipeName: name,
     servings });
   return response.data;
 };
+
+export const saveRecipe = async(recipeData) => {
+  const response = await api.post('api/recipes/save', recipeData);
+  return response.data;
+}
 
 // backend GET /api/recipes - calling all saved recipes
 export const getAllRecipes = async () => {
