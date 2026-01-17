@@ -20,7 +20,13 @@ export const analyzeRecipe = async (recipeText, name = '', servings = 1) => {
 };
 
 export const saveRecipe = async(recipeData) => {
-  const response = await api.post('api/recipes/save', recipeData);
+  const response = await api.post('/api/recipes/save', recipeData);
+  return response.data;
+};
+
+// ADDED : backend DELETE/ api/recipes/:id - delete a recipe
+export const deleteRecipe = async(id) => {
+  const response = await api.delete(`/api/recipes/${id}`);
   return response.data;
 }
 

@@ -50,7 +50,11 @@ const foods = [
     "commonNames": [
       "egg",
       "eggs",
-      "whole egg"
+      "whole egg",
+      "boiled egg",
+      "fried egg",
+      "scrambled egg",
+      "poached egg"
     ],
     "category": "protein",
     "servingSize": 100,
@@ -708,6 +712,739 @@ const foods = [
       "fiber": 7.9,
       "sugar": 1.8,
       "sodium": 2,
+      "cholesterol": 0,
+      "saturatedFat": 0.1,
+      "transFat": 0
+    }
+  },
+  // 🍞 GRAINS (7)
+  {
+    "name": "Quinoa",
+    "commonNames": ["quinoa", "cooked quinoa"],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 120,
+      "protein": 4.4,
+      "carbs": 21,
+      "fat": 1.9,
+      "fiber": 2.8,
+      "sugar": 0.9,
+      "sodium": 7,
+      "cholesterol": 0,
+      "saturatedFat": 0.2,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Tortilla",
+    "commonNames": ["tortilla", "flour tortilla", "wrap"],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 218,
+      "protein": 5.7,
+      "carbs": 36,
+      "fat": 5.6,
+      "fiber": 2.2,
+      "sugar": 2.6,
+      "sodium": 408,
+      "cholesterol": 0,
+      "saturatedFat": 1.4,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Bagel",
+    "commonNames": ["bagel", "plain bagel"],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 257,
+      "protein": 10,
+      "carbs": 51,
+      "fat": 1.7,
+      "fiber": 2.3,
+      "sugar": 7.6,
+      "sodium": 443,
+      "cholesterol": 0,
+      "saturatedFat": 0.3,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Couscous",
+    "commonNames": ["couscous", "cooked couscous"],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 112,
+      "protein": 3.8,
+      "carbs": 23,
+      "fat": 0.2,
+      "fiber": 1.4,
+      "sugar": 0.1,
+      "sodium": 5,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Crackers",
+    "commonNames": ["crackers", "saltine crackers"],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 502,
+      "protein": 9.4,
+      "carbs": 60,
+      "fat": 24,
+      "fiber": 2.2,
+      "sugar": 2.8,
+      "sodium": 732,
+      "cholesterol": 0,
+      "saturatedFat": 5.7,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Cereal",
+    "commonNames": ["cereal", "breakfast cereal"],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 379,
+      "protein": 8,
+      "carbs": 84,
+      "fat": 3,
+      "fiber": 3,
+      "sugar": 24,
+      "sodium": 450,
+      "cholesterol": 0,
+      "saturatedFat": 0.5,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Pita Bread",
+    "commonNames": ["pita", "pita bread"],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 275,
+      "protein": 9,
+      "carbs": 56,
+      "fat": 1.2,
+      "fiber": 2.2,
+      "sugar": 2,
+      "sodium": 536,
+      "cholesterol": 0,
+      "saturatedFat": 0.2,
+      "transFat": 0
+    }
+  },
+
+  // 🥦 VEGETABLES (11)
+  {
+    "name": "Cucumber",
+    "commonNames": ["cucumber", "cucumbers"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 15,
+      "protein": 0.7,
+      "carbs": 3.6,
+      "fat": 0.1,
+      "fiber": 0.5,
+      "sugar": 1.7,
+      "sodium": 2,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Lettuce",
+    "commonNames": ["lettuce", "green lettuce", "romaine"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 15,
+      "protein": 1.4,
+      "carbs": 2.9,
+      "fat": 0.2,
+      "fiber": 1.3,
+      "sugar": 0.8,
+      "sodium": 28,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Mushroom",
+    "commonNames": ["mushroom", "mushrooms", "white mushroom"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 22,
+      "protein": 3.1,
+      "carbs": 3.3,
+      "fat": 0.3,
+      "fiber": 1,
+      "sugar": 2,
+      "sodium": 5,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Potato",
+    "commonNames": ["potato", "potatoes", "white potato"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 77,
+      "protein": 2,
+      "carbs": 17,
+      "fat": 0.1,
+      "fiber": 2.1,
+      "sugar": 0.8,
+      "sodium": 6,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Sweet Potato",
+    "commonNames": ["sweet potato", "sweet potatoes", "yam"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 86,
+      "protein": 1.6,
+      "carbs": 20,
+      "fat": 0.1,
+      "fiber": 3,
+      "sugar": 4.2,
+      "sodium": 55,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Zucchini",
+    "commonNames": ["zucchini", "courgette"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 17,
+      "protein": 1.2,
+      "carbs": 3.1,
+      "fat": 0.3,
+      "fiber": 1,
+      "sugar": 2.5,
+      "sodium": 8,
+      "cholesterol": 0,
+      "saturatedFat": 0.1,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Celery",
+    "commonNames": ["celery", "celery stalk"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 14,
+      "protein": 0.7,
+      "carbs": 3,
+      "fat": 0.2,
+      "fiber": 1.6,
+      "sugar": 1.3,
+      "sodium": 80,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Kale",
+    "commonNames": ["kale", "curly kale"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 35,
+      "protein": 2.9,
+      "carbs": 4.4,
+      "fat": 1.5,
+      "fiber": 4.1,
+      "sugar": 0.8,
+      "sodium": 53,
+      "cholesterol": 0,
+      "saturatedFat": 0.2,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Cauliflower",
+    "commonNames": ["cauliflower"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 25,
+      "protein": 1.9,
+      "carbs": 5,
+      "fat": 0.3,
+      "fiber": 2,
+      "sugar": 1.9,
+      "sodium": 30,
+      "cholesterol": 0,
+      "saturatedFat": 0.1,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Eggplant",
+    "commonNames": ["eggplant", "aubergine"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 25,
+      "protein": 1,
+      "carbs": 6,
+      "fat": 0.2,
+      "fiber": 3,
+      "sugar": 3.5,
+      "sodium": 2,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Asparagus",
+    "commonNames": ["asparagus"],
+    "category": "vegetable",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 20,
+      "protein": 2.2,
+      "carbs": 3.9,
+      "fat": 0.1,
+      "fiber": 2.1,
+      "sugar": 1.9,
+      "sodium": 2,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+
+  // 🍎 FRUITS (9)
+  {
+    "name": "Orange",
+    "commonNames": ["orange", "oranges"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 47,
+      "protein": 0.9,
+      "carbs": 12,
+      "fat": 0.1,
+      "fiber": 2.4,
+      "sugar": 9,
+      "sodium": 0,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Grape",
+    "commonNames": ["grape", "grapes"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 69,
+      "protein": 0.7,
+      "carbs": 18,
+      "fat": 0.2,
+      "fiber": 0.9,
+      "sugar": 16,
+      "sodium": 2,
+      "cholesterol": 0,
+      "saturatedFat": 0.1,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Watermelon",
+    "commonNames": ["watermelon"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 30,
+      "protein": 0.6,
+      "carbs": 7.6,
+      "fat": 0.2,
+      "fiber": 0.4,
+      "sugar": 6.2,
+      "sodium": 1,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Mango",
+    "commonNames": ["mango", "mangoes"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 60,
+      "protein": 0.8,
+      "carbs": 15,
+      "fat": 0.4,
+      "fiber": 1.6,
+      "sugar": 14,
+      "sodium": 1,
+      "cholesterol": 0,
+      "saturatedFat": 0.1,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Pineapple",
+    "commonNames": ["pineapple", "fresh pineapple"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 50,
+      "protein": 0.5,
+      "carbs": 13,
+      "fat": 0.1,
+      "fiber": 1.4,
+      "sugar": 10,
+      "sodium": 1,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Lemon",
+    "commonNames": ["lemon", "lemons"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 29,
+      "protein": 1.1,
+      "carbs": 9,
+      "fat": 0.3,
+      "fiber": 2.8,
+      "sugar": 2.5,
+      "sodium": 2,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Peach",
+    "commonNames": ["peach", "peaches"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 39,
+      "protein": 0.9,
+      "carbs": 10,
+      "fat": 0.3,
+      "fiber": 1.5,
+      "sugar": 8,
+      "sodium": 0,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Pear",
+    "commonNames": ["pear", "pears"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 57,
+      "protein": 0.4,
+      "carbs": 15,
+      "fat": 0.1,
+      "fiber": 3.1,
+      "sugar": 10,
+      "sodium": 1,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Kiwi",
+    "commonNames": ["kiwi", "kiwifruit"],
+    "category": "fruit",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 61,
+      "protein": 1.1,
+      "carbs": 15,
+      "fat": 0.5,
+      "fiber": 3,
+      "sugar": 9,
+      "sodium": 3,
+      "cholesterol": 0,
+      "saturatedFat": 0,
+      "transFat": 0
+    }
+  },
+
+  // 🥩 PROTEINS (5)
+  {
+    "name": "Tuna",
+    "commonNames": ["tuna", "tuna fish", "canned tuna"],
+    "category": "protein",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 144,
+      "protein": 30,
+      "carbs": 0,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0,
+      "sodium": 50,
+      "cholesterol": 47,
+      "saturatedFat": 0.2,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Shrimp",
+    "commonNames": ["shrimp", "prawns"],
+    "category": "protein",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 99,
+      "protein": 24,
+      "carbs": 0.2,
+      "fat": 0.3,
+      "fiber": 0,
+      "sugar": 0,
+      "sodium": 111,
+      "cholesterol": 189,
+      "saturatedFat": 0.1,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Tofu",
+    "commonNames": ["tofu", "bean curd"],
+    "category": "protein",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 76,
+      "protein": 8,
+      "carbs": 1.9,
+      "fat": 4.8,
+      "fiber": 0.3,
+      "sugar": 0.6,
+      "sodium": 7,
+      "cholesterol": 0,
+      "saturatedFat": 0.7,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Chickpeas",
+    "commonNames": ["chickpeas", "garbanzo beans"],
+    "category": "protein",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 164,
+      "protein": 8.9,
+      "carbs": 27,
+      "fat": 2.6,
+      "fiber": 7.6,
+      "sugar": 4.8,
+      "sodium": 7,
+      "cholesterol": 0,
+      "saturatedFat": 0.3,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Pork",
+    "commonNames": ["pork", "pork chop"],
+    "category": "protein",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 242,
+      "protein": 27,
+      "carbs": 0,
+      "fat": 14,
+      "fiber": 0,
+      "sugar": 0,
+      "sodium": 62,
+      "cholesterol": 80,
+      "saturatedFat": 5,
+      "transFat": 0
+    }
+  },
+
+  // 🥛 DAIRY (5)
+  {
+    "name": "Yogurt",
+    "commonNames": ["yogurt", "plain yogurt"],
+    "category": "dairy",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 59,
+      "protein": 10,
+      "carbs": 3.6,
+      "fat": 0.4,
+      "fiber": 0,
+      "sugar": 3.2,
+      "sodium": 36,
+      "cholesterol": 5,
+      "saturatedFat": 0.1,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Cottage Cheese",
+    "commonNames": ["cottage cheese"],
+    "category": "dairy",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 98,
+      "protein": 11,
+      "carbs": 3.4,
+      "fat": 4.3,
+      "fiber": 0,
+      "sugar": 2.7,
+      "sodium": 364,
+      "cholesterol": 17,
+      "saturatedFat": 1.7,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Cream Cheese",
+    "commonNames": ["cream cheese"],
+    "category": "dairy",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 342,
+      "protein": 5.9,
+      "carbs": 5.5,
+      "fat": 34,
+      "fiber": 0,
+      "sugar": 3.2,
+      "sodium": 321,
+      "cholesterol": 110,
+      "saturatedFat": 19.3,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Sour Cream",
+    "commonNames": ["sour cream"],
+    "category": "dairy",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 198,
+      "protein": 2.4,
+      "carbs": 4.6,
+      "fat": 19,
+      "fiber": 0,
+      "sugar": 0.4,
+      "sodium": 51,
+      "cholesterol": 52,
+      "saturatedFat": 12.1,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Heavy Cream",
+    "commonNames": ["heavy cream", "whipping cream"],
+    "category": "dairy",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 340,
+      "protein": 2.1,
+      "carbs": 2.8,
+      "fat": 36,
+      "fiber": 0,
+      "sugar": 2.9,
+      "sodium": 38,
+      "cholesterol": 137,
+      "saturatedFat": 23,
+      "transFat": 0
+    }
+  },
+
+  // 🧂 OTHER (1)
+  {
+    "name": "Soy Sauce",
+    "commonNames": ["soy sauce"],
+    "category": "other",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 53,
+      "protein": 5.6,
+      "carbs": 4.9,
+      "fat": 0.6,
+      "fiber": 0.8,
+      "sugar": 0.4,
+      "sodium": 5637,
       "cholesterol": 0,
       "saturatedFat": 0.1,
       "transFat": 0

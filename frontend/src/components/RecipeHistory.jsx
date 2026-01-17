@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function RecipeHistory({ savedRecipes, onSelectRecipe, onFetchRecipes }) {
+function RecipeHistory({ savedRecipes, onSelectRecipe, onDeleteRecipe, onFetchRecipes }) {
   // debugging:
   // console.log('🎯 RecipeHistory 받은 savedRecipes:', savedRecipes);
   // console.log('🎯 savedRecipes.length:', savedRecipes?.length);
@@ -32,6 +32,15 @@ function RecipeHistory({ savedRecipes, onSelectRecipe, onFetchRecipes }) {
   const handleRecipeClick = (recipe) => {
     onSelectRecipe(recipe); // 1. alerts App.js "this recipe is chosen"
     setIsOpen(false);       // 2. close the dropdown 
+  };
+
+  // ADDED: Handle delete button click
+  const handleDeleteClick = (e, recipeId) => {
+    e.stopPropagation(); // avoid parent button click event
+    
+    if(window.confirm(`Are you sure you want to delete this recipe?`)) {
+      onDeleteRecipe(recipeId);
+    }
   };
 
   const formatDate = (dateString) => {
@@ -92,42 +101,59 @@ function RecipeHistory({ savedRecipes, onSelectRecipe, onFetchRecipes }) {
                 // Recipe list
             <div className='py-2'>
               {savedRecipes.map((recipe) => (
-                <button
+                <div
                   key={recipe._id}
                   onClick={() => handleRecipeClick(recipe)}
-                  className='w-full px-4 py-3 hover:bg-secondary transition-colors text-left border-b border-light last:border-b-0'
+                  className='w-full px-4 py-3 hover:bg-secondary transition-colors text-left border-b border-light last:border-b-0 cursor-pointer'
                 >
-                  {/* Recipe Name */}
+                  {/* Recipe Name and Date */}  
                   <div className='flex justify-between items-start mb-1'>
                     <h4 className='font-semibold text-dark text-sm'>
                       {recipe.name || 'Untitled Recipe'}
                     </h4>
                     <span className='text-xs text-gray-400'>
                       {formatDate(recipe.createdAt)}
-                    </span>
-                  </div>
+                    </span>  
+                  </div>  
 
                   {/* Quick nutrition preview */}
-                  <div className='flex gap-3 text-xs text-gray-600'>
-                    <span>
-                      🔥 {Math.round(recipe.totalNutrition.calories)} cal
-                    </span>
-                    <span>
-                      🥩 {Math.round(recipe.totalNutrition.protein)}g
-                    </span>
-                    <span>
-                      🍞 {Math.round(recipe.totalNutrition.carbs)}g
-                    </span>
-                    <span>
-                      🥑 {Math.round(recipe.totalNutrition.fat)}g
-                    </span>
+                  <div className='flex justify-between items-center'>
+                    <div className='flex gap-3 text-xs text-gray-600 mb-1'>
+                      <span>
+                        🔥 {Math.round(recipe.totalNutrition.calories)} cal
+                      </span>
+                      <span>
+                        🥩 {Math.round(recipe.totalNutrition.protein)}g
+                      </span>
+                      <span>
+                        🍞 {Math.round(recipe.totalNutrition.carbs)}g
+                      </span>
+                      <span>
+                        🥑 {Math.round(recipe.totalNutrition.fat)}g
+                      </span>
+                    </div>
                   </div>
 
+    
+
                   {/* Servings info */}
-                  <div className='text-xs text-gray-400 mt-1'>
-                    {recipe.servings} {recipe.servings === 1 ? 'serving' : 'servings'} • {recipe.ingredients.length} ingredients
+                  <div className='flex justify-between items-center'>
+
+                    <div className='text-xs text-gray-400 mt-1'>
+                      {recipe.servings} {recipe.servings === 1 ? 'serving' : 'servings'} • {recipe.ingredients.length} ingredients
+                    </div>
+
+                  {/* DELETE button */}
+                      <button
+                        onClick={(e)=> handleDeleteClick(e, recipe._id)}
+                        className='text-gray-400 hover:text-red-500 transition-colors p-1'
+                        title='Delete recipe' 
+                      >
+                        🗑️
+                      </button>
                   </div>
-                </button>
+
+                </div>
               ))}
             </div>
           )}

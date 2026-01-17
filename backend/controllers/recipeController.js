@@ -190,10 +190,49 @@ const getAllRecipes = async (req,res) => {
   }
 };
 
+// ADDED: Delete recipe by ID
+// route: DELETE /api/recipes/:id
+const deleteRecipe = async (req, res) => {
+  try {
+    const recipe = await Recipe.findByIdAndDelete(req.params.id);
+
+    if (!recipe) {
+      return res.status(404).json({
+        sucess: false,
+        error: 'Recipe not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Recipe deleted successfully',
+      data: { recipeId: req.params.id }
+    });
+
+  } catch (error) {
+    console.error('Error in delteRecipe:', error);
+
+    // handle invalid MongoDB ObjectId
+    if(error.kind === 'ObjectId') {
+      return res.status(404).json({
+        success: false,
+        error: 'Recipe not found'
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      error: 'Failed to delete recipe'
+    });
+  }
+
+};
+
 
 module.exports = {
   analyzeRecipe,
   getRecipe,
   saveRecipe,
-  getAllRecipes
+  getAllRecipes,
+  deleteRecipe
 };

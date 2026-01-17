@@ -24,6 +24,65 @@ const UNIT_CONVERSIONS = {
   piece: 100
 };
 
+// ADD: Ingredient-specific cup conversions (in grams)
+const CUP_TO_GRAMS = {
+  // Grains
+  'oats': 80,
+  'oatmeal': 80,
+  'rolled oats': 80,
+  'rice': 185,
+  'white rice': 185,
+  'brown rice': 185,
+  'cooked rice': 158,
+  'pasta': 100,
+  'spaghetti': 100,
+  'noodles': 100,
+  'flour': 120,
+  'all-purpose flour': 120,
+  'white flour': 120,
+  'quinoa': 170,
+  'couscous': 173,
+  
+  // Vegetables (chopped)
+  'spinach': 30,
+  'lettuce': 36,
+  'kale': 67,
+  'broccoli': 71,
+  'cauliflower': 100,
+  'carrot': 128,
+  'onion': 160,
+  'tomato': 149,
+  'cucumber': 104,
+  'bell pepper': 149,
+  'mushroom': 70,
+  
+  // Fruits
+  'blueberry': 148,
+  'blueberries': 148,
+  'strawberry': 144,
+  'strawberries': 144,
+  'grape': 151,
+  'grapes': 151,
+  
+  // Proteins
+  'lentils': 192,
+  'chickpeas': 164,
+  'black beans': 172,
+  
+  // Dairy
+  'milk': 244,
+  'yogurt': 245,
+  'cheese': 113,
+  'cheddar cheese': 113,
+  
+  // Other
+  'sugar': 200,
+  'honey': 340,
+  'peanut butter': 258,
+  'butter': 227
+};
+
+
 /**
  * Finds matching food in database
  * @param {string} ingredientName - name from parsed ingredient
@@ -32,19 +91,19 @@ const UNIT_CONVERSIONS = {
 
 async function findMatchingFood(ingredientName) {
   try {
-    // try exact match first (case-insensitive)
+    // MongoDB text search ( smart word matching - refer to Food.js line 40)
     let food = await Food.findOne({
-      name: new RegExp(`^${ingredientName}$`, 'i')
+      $text: { $search: ingredientName}
     });
-          // 여기가 MongoDB query!!
-          // Food model = MongoDB's food collection
 
-    // if no exact match, try partial match
-    if (!food) {
+    // Fallback: regex search
+    if(!food) {
       food = await Food.findOne({
-        name: new RegExp(ingredientName, 'i')
+        $or: [
+          {name: new RegExp(ingredientName, 'i')},
+          {commonNames: new RegExp(ingredientName, 'i')}
+        ]
       });
-          // again, MongoDB query!!
     }
 
     return food; //  MongoDB에서 찾은 food 문서 반환
@@ -81,11 +140,22 @@ const FOOD_ITEM_WEIGHTS = {
 
 function convertToGrams(quantity, unit, ingredientName) {
   const unitLower = unit.toLowerCase();
+  const ingredientLower = ingredientName.toLowerCase();
 
   if(unitLower === "whole" || unitLower === "piece" || unitLower === "slice") {
     const foodName = ingredientName.toLowerCase();
-    const itemWeight = FOOD_ITEM_WEIGHTS[foodName] || 100; 
+    const itemWeight = FOOD_ITEM_WEIGHTS[ingredientLower] || 100; 
     return quantity * itemWeight; 
+  }
+
+  // ADD: cup measurements with ingredient-spectific weights
+  if(unitLower === "cup" || unitLower === 'cups') {
+    // check if there's specific cup conversion for this ingredient 
+    const cupWeight = CUP_TO_GRAMS[ingredientLower];
+    if(cupWeight) {
+      return quantity * cupWeight;
+    }
+    return quantity * 240;
   }
 
   const conversionFactor = UNIT_CONVERSIONS[unitLower] || 100;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Toaster, toast} from 'react-hot-toast';
-import { analyzeRecipe, getAllRecipes, saveRecipe } from './services/api';
+import { analyzeRecipe, getAllRecipes, saveRecipe, deleteRecipe } from './services/api';
 import RecipeForm from './components/RecipeForm';
 import NutritionSummary from './components/NutritionSummary';
 import IngredientList from './components/IngredientList';
@@ -33,7 +33,9 @@ function App() {
 
       // console.log(result.data.ingredients);
 
-      toast.success('Recipe analyzed successfully!');
+      toast.success('Recipe analyzed successfully!', {
+        duration: 2000
+      });
 
       // now new recipe is saved, UPDATE savedRecpie
       // await fetchSavedRecipes(); // fetchSavedRecipes is removed since no saving 
@@ -56,8 +58,8 @@ function App() {
   const handleSaveRecipe = async() => {
     if (!currentRecipe) return;
 
-    console.log('💾 Saving recipe...');
-    console.log('currentRecipe:', currentRecipe);  // ← 추가!
+    // console.log('Saving recipe...');
+    // console.log('currentRecipe:', currentRecipe);
 
     try {
       const recipeData = {
@@ -72,8 +74,10 @@ function App() {
 
       const result = await saveRecipe(recipeData);
 
-      setIsSaved(true); // indicate saving complete
-      toast.success('Recipe saved successfully!');
+      setIsSaved(true); // indicate savings complete
+      toast.success('Recipe saved!', {
+        duration: 2000
+      });
 
       // refresh saved recipe list
       await fetchSavedRecipes();
@@ -115,7 +119,33 @@ function App() {
     };
     setCurrentRecipe(formattedRecipe);
     setIsSaved(true); // ADDED later
-    toast.success('Recipe loaded!');
+    toast.success('Recipe loaded!',  { 
+      duration: 2000 });
+    };
+
+  // ADDED: Delete a saved recipe
+  const handleDeleteRecipe = async (recipeId) => {
+     console.log('🗑️ Deleting recipe:', recipeId);
+    try {
+      await deleteRecipe(recipeId);
+      toast.success('Recipe deleted!', {
+        duration: 2000
+      });
+
+      // refresh saved recipe list
+      await fetchSavedRecipes();
+
+      // if deleted recipe is currently displayed, clear it
+      if(currentRecipe?.data?.recipeId === recipeId) {
+        setCurrentRecipe(null);
+        setIsSaved(false);
+      }
+
+    } catch (error) {
+      console.error('Failed to delete recipe:', error);
+      toast.error('Failed to delete recipe. Please try again')
+      
+    }
   };
 
 
@@ -136,6 +166,7 @@ function App() {
             <RecipeHistory
             savedRecipes={savedRecipes}
             onSelectRecipe={handleSelectRecipe}
+            onDeleteRecipe={handleDeleteRecipe}
             onFetchRecipes={fetchSavedRecipes}
             />
              {/* what's above replaced the button below */}
