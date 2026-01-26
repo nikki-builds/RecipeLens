@@ -102,27 +102,29 @@ The app will open at `http://localhost:3001`
 4. **Review**: View detailed calories, protein, carbs, and fat for each ingredient
 5. **Save**: Click "Save" to store the recipe
 6. **Manage**: Access saved recipes via "My Recipes" (top right corner)
-7. **Delete**: Remove recipes by clicking "Delete
+7. **Delete**: Remove recipes by clicking "Delete"
 
 ## 📸 Screenshots
 
-<div align='center>
+## 📸 Screenshots
+
+<div align="center">
 
 ### Main Interface
 <img src="./screenshots/main-interface.png" width="600" alt="Main Interface">
-*Clean, intuitive recipe input interface*
+<p><em>Clean, intuitive recipe input interface</em></p>
 
 ### Recipe Analysis
 <img src="./screenshots/analysis-result.png" width="600" alt="Recipe Analysis">
-*Detailed nutrition breakdown with matched ingredients*
+<p><em>Detailed nutrition breakdown with matched ingredients</em></p>
 
 ### Saved Recipes
 <img src="./screenshots/saved-recipes.png" width="600" alt="Saved Recipes">
-*Easy access to saved recipes*
+<p><em>Easy access to saved recipes</em></p>
 
 ### Mobile Responsive Design
 <img src="./screenshots/mobile-view.png" width="300" alt="Mobile View">
-*Fully responsive design for mobile devices*
+<p><em>Fully responsive design for mobile devices</em></p>
 
 </div>
 
