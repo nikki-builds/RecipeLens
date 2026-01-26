@@ -1,10 +1,15 @@
 import React from 'react';
 
-function NutritionSummary({ calories, protein, carbs, fat }) {
+function NutritionSummary({ calories, protein, carbs, fat, servings }) { // ADD: servings
   return (
     <div className='bg-secondary rounded-lg p-6 mb-4'>
       <h3 className='text-lg font-semibold text-dark mb-4'>
         Total Nutrition
+        {servings > 1 && (
+          <span className='text-sm font-normal ml-1 text-gray-600'>
+            ({servings} servings)
+          </span>
+        )}
       </h3>
 
       <div className='grid grid-cols-2 gap-6'>

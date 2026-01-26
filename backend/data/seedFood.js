@@ -165,9 +165,16 @@ const foods = [
   {
     "name": "Bread",
     "commonNames": [
-      "bread",
-      "white bread",
-      "slice of bread"
+      'bread', 
+      'white bread', 
+      'whole wheat bread',
+      'whole grain bread',
+      'wheat bread',
+      'multigrain bread',
+      'sourdough bread',
+      'rye bread',
+      'toast',
+      'slice of bread'
     ],
     "category": "grain",
     "servingSize": 100,
@@ -277,8 +284,14 @@ const foods = [
   {
     "name": "Tomato",
     "commonNames": [
-      "tomato",
-      "tomatoes"
+      'tomato',
+      'tomatoes',
+      'cherry tomato',
+      'cherry tomatoes',
+      'grape tomato',
+      'grape tomatoes',
+      'roma tomato',
+      'plum tomato'
     ],
     "category": "vegetable",
     "servingSize": 100,
@@ -1452,7 +1465,7 @@ const foods = [
   },
   {
   name: 'Salt',
-  commonNames: ['salt', 'table salt', 'sea salt'],
+  commonNames: ['salt', 'table salt', 'sea salt', 'kosher salt'],
   category: 'seasoning',
   servingSize: 100,
   servingUnit: 'g',
@@ -1555,6 +1568,51 @@ const foods = [
     sodium: 0,
     cholesterol: 0,
     saturatedFat: 0,
+    transFat: 0
+  }
+},
+{
+  name: 'Red Pepper Flakes',
+  commonNames: ['red pepper flakes', 'crushed red pepper', 'chili flakes'],
+  category: 'seasoning',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 318,
+    protein: 12,
+    carbs: 57,
+    fat: 14.5,
+    fiber: 27.2,
+    sugar: 10.3,
+    sodium: 91,
+    cholesterol: 0,
+    saturatedFat: 2.5,
+    transFat: 0
+  }
+},
+{
+  name: 'Parmesan Cheese',
+  commonNames: [
+    'parmesan',
+    'parmesan cheese',
+    'parmigiano',
+    'parmigiano reggiano',
+    'grated parmesan',
+    'shredded parmesan'
+  ],
+  category: 'dairy',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 431,
+    protein: 38,
+    carbs: 4.1,
+    fat: 29,
+    fiber: 0,
+    sugar: 0.9,
+    sodium: 1529,
+    cholesterol: 88,
+    saturatedFat: 19,
     transFat: 0
   }
 }

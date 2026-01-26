@@ -30,7 +30,9 @@ const analyzeRecipe = async (req,res) => {
 
     // step: 2 calculate nutrition
     console.log('Calculating nutrition...');
-    const nutritionData = await nutritionService.calculateRecipeNutrition(parsedIngredients);
+    const nutritionData = await nutritionService.calculateRecipeNutrition(
+      parsedIngredients,
+      servings || 1);
 
     // step: 3 Save to database. --> changed to NO SAVING
     // user will click "SAVE" button to save

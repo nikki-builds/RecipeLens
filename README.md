@@ -105,7 +105,26 @@ The app will open at `http://localhost:3001`
 7. **Delete**: Remove recipes by clicking "Delete
 
 ## 📸 Screenshots
-[photos]
+
+<div align='center>
+
+### Main Interface
+![Main Interface](./screenshots/main-interface.png)
+*Clean, intuitive recipe input interface*
+
+### Recipe Analysis
+![Recipe Analysis](./screenshots/analysis-result.png)
+*Detailed nutrition breakdown with matched ingredients*
+
+### Saved Recipes
+![Saved Recipes](./screenshots/saved-recipes.png)
+*Easy access to saved recipes*
+
+### Mobile Responsive Design
+![Mobile View](./screenshots/mobile-view.png)
+*Fully responsive design for mobile devices*
+
+</div>
 
 ## 🎯 How It Works
 
@@ -145,7 +164,7 @@ MIT License
 
 ## 👤 Author
 
-**Nikki**
+**Na Yeon (Nikki) Kim**
 - Transitioning from nutrition background to tech
 - Combining nutrition expertise with full-stack development
 

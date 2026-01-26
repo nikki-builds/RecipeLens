@@ -33,6 +33,26 @@ const UNIT_CONVERSIONS = {
   piece: 100
 };
 
+const TABLESPOON_TO_GRAMS = {
+  // Oils (lighter than water)
+  'olive oil': 13.5,
+  'sesame oil': 13.5,
+  'vegetable oil': 13.5,
+  'coconut oil': 13,
+  
+  // Thick liquids (heavier)
+  'honey': 21,
+  'maple syrup': 20,
+  'molasses': 20,
+  
+  // Nut butters
+  'peanut butter': 16,
+  'almond butter': 16,
+  
+  // Default
+  'default': 15
+  };
+
 /**
 ADD: Ingredient-specific cup conversions (in grams)
 */
@@ -90,7 +110,7 @@ const CUP_TO_GRAMS = {
   'sugar': 200,
   'honey': 340,
   'peanut butter': 258,
-  'butter': 227.
+  'butter': 227
 };
 
 /** 
@@ -111,7 +131,7 @@ const FOOD_ITEM_WEIGHTS = {
   'slice of cheese': 28,
   'cheddar': 28,
   'cheese': 28,
-};
+}; 
 
 /**
  * Seasonings that should use minimal amounts when "to taste" (unit: 'whole')
@@ -189,7 +209,7 @@ function convertToGrams(quantity, unit, ingredientName) {
 
   // ADD (becuase 'to taste' is not clear)
   // 1. Handle "to taste" seasonings with minimal amounts
-  if (unitLower === 'whole' && seasonings.includes(ingredientLower)) {
+  if (unitLower === 'whole' && SEASONINGS.includes(ingredientLower)) {
     return 1; // 1g for 'to taste' seasonings
   }
 
@@ -199,7 +219,13 @@ function convertToGrams(quantity, unit, ingredientName) {
     return quantity * itemWeight; 
   }
 
-  // 3. ADD: cup measurements with ingredient-spectific weights
+  // 3. tablespoon
+   if(unitLower === "tablespoon" || unitLower === "tbsp") {
+    const tbspWeight = TABLESPOON_TO_GRAMS[ingredientLower] || 15;
+    return quantity * tbspWeight;
+  }
+
+  // 4. ADD: cup measurements with ingredient-spectific weights
   if(unitLower === "cup" || unitLower === 'cups') {
     // check if there's specific cup conversion for this ingredient 
     const cupWeight = CUP_TO_GRAMS[ingredientLower];
@@ -250,7 +276,7 @@ function calculateIngredientNutrition(ingredient, foodData) {
  * @param {Array} parsedIngredients - array from OpenAI parsing
  * @return {Promise<Object>} - complete nutrition breakdown
  */
-async function calculateRecipeNutrition(parsedIngredients) {
+async function calculateRecipeNutrition(parsedIngredients, servings = 1) {
   const results = [];
   let matchedCount = 0;
 
@@ -311,6 +337,7 @@ async function calculateRecipeNutrition(parsedIngredients) {
   return {
     ingredients: results,
     totals: totals,
+    servings: servings,
     matchedCount,
     totalCount: results.length
   };

@@ -224,6 +224,7 @@ function App() {
             protein={currentRecipe.data.totalNutrition.protein}
             carbs={currentRecipe.data.totalNutrition.carbs}
             fat={currentRecipe.data.totalNutrition.fat} 
+            servings={currentRecipe.data.servings}
           />
 
           {/* IngredientList Component */}
