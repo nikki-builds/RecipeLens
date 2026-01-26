@@ -109,19 +109,19 @@ The app will open at `http://localhost:3001`
 <div align='center>
 
 ### Main Interface
-![Main Interface](./screenshots/main-interface.png)
+<img src="./screenshots/main-interface.png" width="600" alt="Main Interface">
 *Clean, intuitive recipe input interface*
 
 ### Recipe Analysis
-![Recipe Analysis](./screenshots/analysis-result.png)
+<img src="./screenshots/analysis-result.png" width="600" alt="Recipe Analysis">
 *Detailed nutrition breakdown with matched ingredients*
 
 ### Saved Recipes
-![Saved Recipes](./screenshots/saved-recipes.png)
+<img src="./screenshots/saved-recipes.png" width="600" alt="Saved Recipes">
 *Easy access to saved recipes*
 
 ### Mobile Responsive Design
-![Mobile View](./screenshots/mobile-view.png)
+<img src="./screenshots/mobile-view.png" width="300" alt="Mobile View">
 *Fully responsive design for mobile devices*
 
 </div>
