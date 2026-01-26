@@ -300,7 +300,7 @@ const foods = [
     "name": "Bell Pepper",
     "commonNames": [
       "bell pepper",
-      "pepper",
+      "capsicum",
       "sweet pepper"
     ],
     "category": "vegetable",
@@ -1449,7 +1449,115 @@ const foods = [
       "saturatedFat": 0.1,
       "transFat": 0
     }
+  },
+  {
+  name: 'Salt',
+  commonNames: ['salt', 'table salt', 'sea salt'],
+  category: 'seasoning',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    sodium: 38758,
+    cholesterol: 0,
+    saturatedFat: 0,
+    transFat: 0
   }
+},
+{
+  name: 'Black Pepper',
+  commonNames: ['black pepper', 'pepper', 'ground pepper', 'pepper powder'],
+  category: 'seasoning',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 251,
+    protein: 10.4,
+    carbs: 64,
+    fat: 3.3,
+    fiber: 25.3,
+    sugar: 0.6,
+    sodium: 20,
+    cholesterol: 0,
+    saturatedFat: 1,
+    transFat: 0
+  }
+},
+{
+  name: 'Sesame Oil',
+  commonNames: ['sesame oil', 'toasted sesame oil'],
+  category: 'other',
+  servingSize: 100,
+  servingUnit: 'ml',
+  nutrition: {
+    calories: 884,
+    protein: 0,
+    carbs: 0,
+    fat: 100
+  }
+},
+{
+  name: 'Cinnamon',
+  commonNames: ['cinnamon', 'ground cinnamon', 'cinnamon powder'],
+  category: 'seasoning',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 247,
+    protein: 4,
+    carbs: 81,
+    fat: 1.2,
+    fiber: 53,
+    sugar: 2.2,
+    sodium: 10,
+    cholesterol: 0,
+    saturatedFat: 0.3,
+    transFat: 0
+  }
+},
+{
+  name: 'Vanilla Extract',
+  commonNames: ['vanilla extract', 'vanilla', 'pure vanilla extract'],
+  category: 'seasoning',
+  servingSize: 100,
+  servingUnit: 'ml',
+  nutrition: {
+    calories: 288,
+    protein: 0.1,
+    carbs: 12.7,
+    fat: 0.1,
+    fiber: 0,
+    sugar: 12.7,
+    sodium: 9,
+    cholesterol: 0,
+    saturatedFat: 0,
+    transFat: 0
+  }
+},
+{
+  name: 'Ice',
+  commonNames: ['ice', 'ice cubes', 'crushed ice'],
+  category: 'other',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    sodium: 0,
+    cholesterol: 0,
+    saturatedFat: 0,
+    transFat: 0
+  }
+}
 ];
 
 module.exports = foods;

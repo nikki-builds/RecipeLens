@@ -18,21 +18,32 @@ async function parseIngredients(recipeText) {
         {
           role: "system",
           content: `You are a recipe ingredient parser. Extract ingredients from recipe text and return ONLY a JSON array. Each ingredient should have:
-          - quantitiy (number)
-          - unit (e.g, "cup", "tablespoon", "gram", "whole")
-          - ingredient (food name, lowercase)
+          - quantity (number)
+          - unit (e.g., "cup", "tablespoon", "teaspoon", "gram", "clove", "piece", "pinch", "dash")
+          - ingredient (food name, lowercase, simplified)
           
-          Example Output:
-          [
-            {"quantity":2, "unit": "cup", "ingredient": "flour"},
-            {"quantity":1, "unit": "tablespoon", "ingredient": "olive oil"},
-          ]
-          
-          Rules:
-          - Use standard units (cup, tablespoon, teaspoon, gram, ounce, whole)
-          - Convert fractions to decimals (1/2 to 0.5)
+          CRITICAL RULES:
+          - For garlic: ALWAYS use unit "clove" (never "whole"). Example: "2 cloves garlic" → {"quantity": 2, "unit": "clove", "ingredient": "garlic"}
+          - For chicken breast/thighs: use unit "piece" (never "whole")
+          - For "to taste": use unit "pinch" with quantity 1
+          - Separate unit from ingredient name (WRONG: "clove garlic", CORRECT: unit="clove", ingredient="garlic")
+          - Remove preparation terms from ingredient (e.g., "minced", "diced", "sliced", "chopped")
+          - Use standard units: cup, tablespoon, teaspoon, gram, ounce, piece, clove, pinch, dash
+          - Convert fractions to decimals (1/2 → 0.5, 1/4 → 0.25)
           - Keep ingredient names simple and lowercase
-          - If no unit is specified, use "whole"
+          - If no unit specified, use "piece" for countable items, "gram" otherwise
+
+          - For liquid seasonings/extracts:
+          * "a few drops" → {"quantity": 0.5, "unit": "teaspoon", "ingredient": "..."}
+          * "a splash" → {"quantity": 0.5, "unit": "tablespoon", "ingredient": "..."}
+          * "a squeeze of lemon" → {"quantity": 1, "unit": "tablespoon", "ingredient": "lemon juice"}
+          * "juice of 1 lemon" → {"quantity": 2, "unit": "tablespoon", "ingredient": "lemon juice"}
+          
+          Example Inputs:
+          "2 cloves garlic, minced" → {"quantity": 2, "unit": "clove", "ingredient": "garlic"}
+          "1 chicken breast" → {"quantity": 1, "unit": "piece", "ingredient": "chicken breast"}
+          "Salt to taste" → {"quantity": 1, "unit": "pinch", "ingredient": "salt"}
+          "1/2 cup chopped onion" → {"quantity": 0.5, "unit": "cup", "ingredient": "onion"}
           - Return ONLY the JSON array, not other text`
         },
         {
