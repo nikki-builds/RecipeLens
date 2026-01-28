@@ -4,6 +4,10 @@
 
 **[View Live Demo](https://recipe-lens-erhr.vercel.app/)**
 
+## ⚠️ Note
+
+The backend is hosted on Render's free tier. The first request after 15 minutes of inactivity may take up to 50 seconds as the server wakes up. Subsequent requests will be fast.
+
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-14+-339933?logo=node.js&logoColor=white)
