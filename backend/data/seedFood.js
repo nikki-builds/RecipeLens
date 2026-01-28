@@ -1615,7 +1615,67 @@ const foods = [
     saturatedFat: 19,
     transFat: 0
   }
-}
+},
+{
+  name: 'Ground Pork',
+  commonNames: [
+    'ground pork', 'minced pork', 'pork mince'
+  ],
+  category: 'protein',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 263,
+    protein: 17,
+    carbs: 0,
+    fat: 21,
+    fiber: 0,
+    sugar: 0,
+    sodium: 62,
+    cholesterol: 72,
+    saturatedFat: 7.7,
+    transFat: 0
+  }
+},
+{
+  name: 'Ground Turkey',
+  commonNames: ['ground turkey', 'minced turkey', 'turkey mince'],
+  category: 'protein',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 203,
+    protein: 20,
+    carbs: 0,
+    fat: 13,
+    fiber: 0,
+    sugar: 0,
+    sodium: 87,
+    cholesterol: 84,
+    saturatedFat: 3.5,
+    transFat: 0
+  }
+},
+{
+  name: 'Ground Beef',
+  commonNames: ['ground beef', 'minced beef', 'beef mince', 'hamburger meat'],
+  category: 'protein',
+  servingSize: 100,
+  servingUnit: 'g',
+  nutrition: {
+    calories: 250,
+    protein: 17,
+    carbs: 0,
+    fat: 20,
+    fiber: 0,
+    sugar: 0,
+    sodium: 66,
+    cholesterol: 70,
+    saturatedFat: 7.7,
+    transFat: 0.9
+  }
+},
+
 ];
 
 module.exports = foods;

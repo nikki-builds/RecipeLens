@@ -99,6 +99,15 @@ const CUP_TO_GRAMS = {
   'lentils': 192,
   'chickpeas': 164,
   'black beans': 172,
+
+  // Ground Meats
+  'ground pork': 225,
+  'minced pork': 225,
+  'ground turkey': 220,
+  'minced turkey': 220,
+  'ground beef': 225,
+  'minced beef': 225,
+  'hamburger meat': 225,
   
   // Dairy
   'milk': 244,
@@ -120,17 +129,35 @@ const CUP_TO_GRAMS = {
 const FOOD_ITEM_WEIGHTS = {
   'egg': 50,
   'eggs': 50,
-  'whole egg': 50,
-  'banana': 118,
-  'bananas': 118,
-  'apple': 182,
-  'apples': 182,
+  
+  // Bread
   'bread': 30,
   'slice of bread': 30,
+  'whole wheat bread': 30,          
+  'wheat bread': 30,                
+  'white bread': 30,
+  
+  // Cheese
   'cheddar cheese': 28,
   'slice of cheese': 28,
   'cheddar': 28,
   'cheese': 28,
+  
+  // Protein
+  'chicken breast': 170,
+  'chicken breasts': 170,
+  'shrimp': 4,
+  'prawns': 4,
+  
+  // Fruits/Veg
+  'banana': 118,
+  'apple': 182,
+  'avocado': 150,                  
+  'lemon': 60,                     
+  
+  // Garlic
+  'garlic': 4,
+  'garlic clove': 4,
 }; 
 
 /**

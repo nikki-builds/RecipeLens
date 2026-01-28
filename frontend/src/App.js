@@ -210,8 +210,8 @@ function App() {
           disabled={isSaved}
           className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
             isSaved
-              ? 'bg-dark text-white cursor-not-allowed opacity-70'
-              : 'bg-primary hover:bg-opacity-90 text-white hover:shadow-lg'
+              ? 'bg-accent bg-opacity-30 text-primary cursor-not-allowed'
+              : 'bg-accent hover:bg-opacity-90 text-dark hover:shadow-lg transform hover:scale-105'
           }`}
         >
           {isSaved ? '✓ Saved' : 'Save'}

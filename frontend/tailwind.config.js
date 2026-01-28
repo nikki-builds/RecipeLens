@@ -4,12 +4,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: '#dd6e42',
-        secondary: '#e8dab2',
-        dark: '#4f6d7a',
-        light: '#c0d6df',
-        background: '#eaeaea',
+      colors:{
+        primary: '#8eb44e',      //(main button)
+        secondary: '#f5ecdc',    // cream (card bg)
+        dark: '#362822',         // dark brown (text)
+        light: '#b9cd90',        // light green (border)
+        background: '#fdfcf8',   // white
+        accent: '#d9af52',       // golden (by choice)
       },
       animation: {
         slideInRight: 'slideInRight 0.7s ease-out',

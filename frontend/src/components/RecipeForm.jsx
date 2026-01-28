@@ -83,8 +83,8 @@ function RecipeForm({ onSubmit, loading }) {
         type='submit'
         disabled={loading}
         className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg ${loading
-            ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-primary hover:bg-opacity-90 text-white'
+            ? 'bg-primary bg-opacity-60 text-white cursor-wait'
+            : 'bg-primary hover:bg-opacity-90 hover:shadow-lg text-white'
             }`}
         >
           {loading ? 'Analyzing...' : 'Analyze Recipe'}
