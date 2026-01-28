@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { Toaster, toast} from 'react-hot-toast';
 import { analyzeRecipe, getAllRecipes, saveRecipe, deleteRecipe } from './services/api';
 import RecipeForm from './components/RecipeForm';
@@ -72,7 +72,7 @@ function App() {
 
        console.log('recipeData:', recipeData);  // ← 추가!
 
-      const result = await saveRecipe(recipeData);
+      await saveRecipe(recipeData);
 
       setIsSaved(true); // indicate savings complete
       toast.success('Recipe saved!', {
@@ -90,7 +90,7 @@ function App() {
 
 
   // RecipeHistory dropdown 
-  const fetchSavedRecipes = async ()=> {
+  const fetchSavedRecipes = useCallback (async ()=> {
     //  console.log('🔍 fetchSavedRecipes');
     try {
       const recipes = await getAllRecipes();
@@ -99,7 +99,7 @@ function App() {
       console.error('Failed to fetch recipes:', error);
       toast.error('Failed to load recipe history');
     }
-  };
+  },[]);
 
   // Load a saved recipe from history
   const handleSelectRecipe = (recipe) => {
