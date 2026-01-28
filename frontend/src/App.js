@@ -19,6 +19,12 @@ function App() {
   // ADDED 4. saved status (to show if current recipe is saved)
   const [ isSaved, setIsSaved ] = useState(false);
 
+    // ADD: return to home click
+  const handleGoHome = () => {
+    setCurrentRecipe(null);
+    setIsSaved(false);
+  }
+
   // Todo: add components and logic
 
   // called when submitted from RecipeForm
@@ -158,7 +164,8 @@ function App() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4'>
           <div className='flex justify-between items-center'>
             {/* Logo/Title */}
-            <h1 className='text-3xl font-bold text-white'>
+            <h1 onClick={handleGoHome}
+            className='text-3xl font-bold text-white cursor-pointer select-none hover:opacity-90 transition-opacity'>
               Recipe<span className='text-primary'>Lens</span>
             </h1>
 
