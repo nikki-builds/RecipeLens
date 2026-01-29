@@ -16,14 +16,17 @@ function App() {
   const [ savedRecipes, setSavedRecipes ] = useState([]);
   // 3. loading status (spinner when being analyzed)
   const [ loading, setLoading ] = useState(false);
-  // ADDED 4. saved status (to show if current recipe is saved)
+  // ADDED: 4. saved status (to show if current recipe is saved)
   const [ isSaved, setIsSaved ] = useState(false);
+  // ADDED: reset home button
+  const [ resetKey, setResetKey ] = useState(0);
 
     // ADD: return to home click
   const handleGoHome = () => {
     console.log("before:", currentRecipe);
     setCurrentRecipe(null);
     setIsSaved(false);
+    setResetKey(prev => prev + 1) // ADDED
   }
 
   // Todo: add components and logic
@@ -195,6 +198,7 @@ function App() {
     {/* RecipeForm Component */}
     <div className='w-full sm:w-[520px]'>
      <RecipeForm
+     key={resetKey}
         onSubmit={handleAnalyzeRecipe}
         loading={loading} 
       />
