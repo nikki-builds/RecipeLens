@@ -11,7 +11,8 @@ function RecipeHistory({ savedRecipes, onSelectRecipe, onDeleteRecipe, onFetchRe
   // Fetch recipes when component mounts
   useEffect(() => {
     onFetchRecipes();
-  },[onFetchRecipes]); // ,[] meaning once, first time only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]); // ,[] meaning once, first time only
 
   // Close dropdown when clicking outside
   useEffect(()=> {
