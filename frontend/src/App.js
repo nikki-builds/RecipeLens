@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Toaster, toast} from 'react-hot-toast';
 import { analyzeRecipe, getAllRecipes, saveRecipe, deleteRecipe } from './services/api';
 import RecipeForm from './components/RecipeForm';
@@ -21,6 +21,7 @@ function App() {
 
     // ADD: return to home click
   const handleGoHome = () => {
+    console.log("before:", currentRecipe);
     setCurrentRecipe(null);
     setIsSaved(false);
   }
@@ -96,7 +97,7 @@ function App() {
 
 
   // RecipeHistory dropdown 
-  const fetchSavedRecipes = useCallback (async ()=> {
+  const fetchSavedRecipes = async () => {
     //  console.log('🔍 fetchSavedRecipes');
     try {
       const recipes = await getAllRecipes();
@@ -105,7 +106,7 @@ function App() {
       console.error('Failed to fetch recipes:', error);
       toast.error('Failed to load recipe history');
     }
-  },[]);
+  }
 
   // Load a saved recipe from history
   const handleSelectRecipe = (recipe) => {
@@ -153,18 +154,18 @@ function App() {
       
     }
   };
-
-
   return (
     <div className='min-h-screen bg-background'>
       <Toaster position="top-right" />
+
 
       {/* Header */}
       <header className='bg-dark shadow-lg border-b-2 border-primary'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4'>
           <div className='flex justify-between items-center'>
             {/* Logo/Title */}
-            <h1 onClick={handleGoHome}
+            <h1
+            onClick={handleGoHome}
             className='text-3xl font-bold text-white cursor-pointer select-none hover:opacity-90 transition-opacity'>
               Recipe<span className='text-primary'>Lens</span>
             </h1>
@@ -213,7 +214,6 @@ function App() {
         
         {/* Save Button - Improved */}
         <button
-          onClick={handleSaveRecipe}
           disabled={isSaved}
           className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
             isSaved
