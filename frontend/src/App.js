@@ -214,6 +214,7 @@ function App() {
         
         {/* Save Button - Improved */}
         <button
+          onClick={handleSaveRecipe}
           disabled={isSaved}
           className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
             isSaved
