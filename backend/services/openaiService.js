@@ -51,7 +51,7 @@ async function parseIngredients(recipeText) {
           content: recipeText
         }
       ],
-      temperature: 0.3, // lower = more consistent parsing, less creative more accurate
+      temperature: 0, // lower = more consistent parsing, less creative more accurate
       max_tokens: 1500
     });
 
