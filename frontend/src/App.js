@@ -207,10 +207,21 @@ function App() {
     }`}>
       {/* ADDED: Header with save button */}
       <div className='flex justify-between items-center mb-4'>
-        <h2 className='text-2xl font-semibold text-dark'>
-          Nutrition Analysis
-        </h2>
-        
+        {currentRecipe.data.name && currentRecipe.data.name !== 'Untitled Recipe' ? (
+          <div>
+            <p className='text-xs font-semibold text-dark uppercase tracking-wide'>
+              Nutrition Analysis
+            </p>
+            <h2 className='text-2xl font-semibold text-dark'>
+              {currentRecipe.data.name}
+            </h2>
+          </div>
+        ) : (
+          <h2 className='text-2xl font-semibold text-dark'>
+            Nutrition Analysis
+          </h2>
+        )}
+
         {/* Save Button - Improved */}
         <button
           onClick={handleSaveRecipe}
