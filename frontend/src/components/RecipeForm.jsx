@@ -64,7 +64,7 @@ function RecipeForm({ onSubmit, loading }) {
         <div>
           <label
           htmlFor='servings'
-          className='block-text-sm font-medium text-dark mb-2'>
+          className='block text-sm font-medium text-dark mb-2'>
             Servings
           </label>
           <input

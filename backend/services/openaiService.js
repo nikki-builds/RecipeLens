@@ -52,7 +52,7 @@ async function parseIngredients(recipeText) {
         }
       ],
       temperature: 0.3, // lower = more consistent parsing, less creative more accurate
-      max_tokens: 500
+      max_tokens: 1500
     });
 
     // Extract the JSON from GPT's response

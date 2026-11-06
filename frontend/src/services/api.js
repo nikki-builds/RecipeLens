@@ -36,12 +36,6 @@ export const getAllRecipes = async () => {
   return response.data.data;
 };
 
-// backend GET /api/recipes/:id - calling a certain, specific recipe
-export const getRecipeById = async (id) => {
-  const response = await api.get(`/api/recipes/${id}`);
-  return response.data;
-};
-
 // Health check (for testing connection to backend)
 export const checkHealth = async () => {
   const response = await api.get('/api/health');

@@ -25,7 +25,7 @@ app.get('/',(req,res)=> {
     version:'1.0.0',
     endpoints: {
       health: '/api/health',
-      recipes: 'api/recipes'
+      recipes: '/api/recipes'
     }
   });
 });
@@ -38,10 +38,6 @@ app.get('/api/health', (req,res)=> {
   });
 });
 
-// ToDo: add routes here later
-// app.use('/api/repices', recipeRoutes);)
-// app.use('/api/foods', foodRoutes);
-
 // API Routes
 app.use('/api/recipes', require('./routes/recipeRoutes'));
 
@@ -49,7 +45,7 @@ app.use('/api/recipes', require('./routes/recipeRoutes'));
 // 404 Handler
 app.use((req,res) => {
   res.status(404).json({
-    succes: false,
+    success: false,
     error: 'Route not found',
     path: req.originalUrl,
     method: req.method

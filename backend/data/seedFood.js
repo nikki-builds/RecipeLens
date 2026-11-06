@@ -23,29 +23,6 @@ const foods = [
     }
   },
   {
-    "name": "Ground Beef",
-    "commonNames": [
-      "ground beef",
-      "beef",
-      "minced beef"
-    ],
-    "category": "protein",
-    "servingSize": 100,
-    "servingUnit": "g",
-    "nutrition": {
-      "calories": 250,
-      "protein": 26,
-      "carbs": 0,
-      "fat": 15,
-      "fiber": 0,
-      "sugar": 0,
-      "sodium": 75,
-      "cholesterol": 80,
-      "saturatedFat": 6,
-      "transFat": 0.5
-    }
-  },
-  {
     "name": "Egg",
     "commonNames": [
       "egg",

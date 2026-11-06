@@ -154,13 +154,13 @@ const getRecipe = async (req,res) => {
   } catch (error) {
     console.error('Error in getRecipe:', error);
     // handle invalid MongoDB ObjectId
-    if(error.kind === 'ObjectId') {
+    if(error.name === 'CastError') {
       return res.status(404).json({
         success: false,
         error: 'Recipe not found'
       });
     }
-    
+
     res.status(500).json({
       success: false,
       error: 'Failed to retrieve recipe'
@@ -200,7 +200,7 @@ const deleteRecipe = async (req, res) => {
 
     if (!recipe) {
       return res.status(404).json({
-        sucess: false,
+        success: false,
         error: 'Recipe not found'
       });
     }
@@ -212,10 +212,10 @@ const deleteRecipe = async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Error in delteRecipe:', error);
+    console.error('Error in deleteRecipe:', error);
 
     // handle invalid MongoDB ObjectId
-    if(error.kind === 'ObjectId') {
+    if(error.name === 'CastError') {
       return res.status(404).json({
         success: false,
         error: 'Recipe not found'

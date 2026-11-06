@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Toaster, toast} from 'react-hot-toast';
 import { analyzeRecipe, getAllRecipes, saveRecipe, deleteRecipe } from './services/api';
 import RecipeForm from './components/RecipeForm';
@@ -21,9 +21,8 @@ function App() {
   // ADDED: reset home button
   const [ resetKey, setResetKey ] = useState(0);
 
-    // ADD: return to home click
+    // ADD: returning to home (resetting)
   const handleGoHome = () => {
-    console.log("before:", currentRecipe);
     setCurrentRecipe(null);
     setIsSaved(false);
     setResetKey(prev => prev + 1) // ADDED
@@ -54,7 +53,7 @@ function App() {
       console.error('Analysis failed:', error);
 
       // matchedCount === 0 error (error that backend threw)
-      if (error.response?.status === 400) {
+      if (error.response?.status === 422) {
         toast.error('No matching ingredients found in database');
       } else {
         toast.error('Failed to analyze recipe. Please try again.');
@@ -80,8 +79,6 @@ function App() {
         servings: currentRecipe.data.servings
       };
 
-       console.log('recipeData:', recipeData);  // ← 추가!
-
       await saveRecipe(recipeData);
 
       setIsSaved(true); // indicate savings complete
@@ -99,9 +96,8 @@ function App() {
   };
 
 
-  // RecipeHistory dropdown 
-  const fetchSavedRecipes = async () => {
-    //  console.log('🔍 fetchSavedRecipes');
+  // RecipeHistory dropdown
+  const fetchSavedRecipes = useCallback(async () => {
     try {
       const recipes = await getAllRecipes();
       setSavedRecipes(recipes);
@@ -109,7 +105,7 @@ function App() {
       console.error('Failed to fetch recipes:', error);
       toast.error('Failed to load recipe history');
     }
-  }
+  }, []);
 
   // Load a saved recipe from history
   const handleSelectRecipe = (recipe) => {
@@ -135,7 +131,6 @@ function App() {
 
   // ADDED: Delete a saved recipe
   const handleDeleteRecipe = async (recipeId) => {
-     console.log('🗑️ Deleting recipe:', recipeId);
     try {
       await deleteRecipe(recipeId);
       toast.success('Recipe deleted!', {

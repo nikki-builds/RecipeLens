@@ -115,8 +115,6 @@ The app will open at `http://localhost:3001`
 
 ## 📸 Screenshots
 
-## 📸 Screenshots
-
 <div align="center">
 
 ### Main Interface
@@ -160,7 +158,7 @@ RecipeLens uses accurate cup-to-gram conversions for common ingredients:
 - 1 cup broccoli = 71g
 - And more...
 
-## Future Enchancements
+## 🚀 Future Enchancements
 
 - [ ] Meal planning features
 - [ ] Export recipes to PDF

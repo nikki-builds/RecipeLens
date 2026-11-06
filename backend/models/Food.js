@@ -7,7 +7,7 @@ const foodSchema = new mongoose.Schema({
     trim: true
   },
   commonNames: [String],
-  cateogry: {
+  category: {
     type: String,
     enum:['protein', 'grain', 'vegetable', 'fruit', 'dairy', 'fat', 'sweetener', 'spice', 'other'],
     default: 'other'

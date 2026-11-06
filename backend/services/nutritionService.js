@@ -283,7 +283,7 @@ function calculateIngredientNutrition(ingredient, foodData) {
   const scaleFactor = grams / 100;
 
   return {
-    foodId: foodData._Id,
+    foodId: foodData._id,
     name: ingredient.ingredient,
     amount: ingredient.quantity,
     unit: ingredient.unit,
