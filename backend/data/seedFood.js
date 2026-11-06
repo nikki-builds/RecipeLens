@@ -121,7 +121,40 @@ const foods = [
     "commonNames": [
       "pasta",
       "spaghetti",
-      "noodles"
+      "noodles",
+      "dry pasta",
+      "dried pasta",
+      "dry spaghetti",
+      "dried spaghetti",
+      "linguine",
+      "fettuccine",
+      "penne",
+      "rigatoni"
+    ],
+    "category": "grain",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 371,
+      "protein": 13,
+      "carbs": 74.7,
+      "fat": 1.5,
+      "fiber": 3.2,
+      "sugar": 2.7,
+      "sodium": 6,
+      "cholesterol": 0,
+      "saturatedFat": 0.3,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Pasta (cooked)",
+    "commonNames": [
+      "cooked pasta",
+      "cooked spaghetti",
+      "cooked noodles",
+      "boiled pasta",
+      "boiled spaghetti"
     ],
     "category": "grain",
     "servingSize": 100,
@@ -446,8 +479,7 @@ const foods = [
   {
     "name": "Greek Yogurt",
     "commonNames": [
-      "greek yogurt",
-      "yogurt"
+      "greek yogurt"
     ],
     "category": "dairy",
     "servingSize": 100,
@@ -1326,20 +1358,20 @@ const foods = [
   // 🥛 DAIRY (5)
   {
     "name": "Yogurt",
-    "commonNames": ["yogurt", "plain yogurt"],
+    "commonNames": ["yogurt", "plain yogurt", "whole milk yogurt", "plain whole milk yogurt"],
     "category": "dairy",
     "servingSize": 100,
     "servingUnit": "g",
     "nutrition": {
-      "calories": 59,
-      "protein": 10,
-      "carbs": 3.6,
-      "fat": 0.4,
+      "calories": 61,
+      "protein": 3.5,
+      "carbs": 4.7,
+      "fat": 3.3,
       "fiber": 0,
-      "sugar": 3.2,
-      "sodium": 36,
-      "cholesterol": 5,
-      "saturatedFat": 0.1,
+      "sugar": 4.7,
+      "sodium": 46,
+      "cholesterol": 13,
+      "saturatedFat": 2.1,
       "transFat": 0
     }
   },
