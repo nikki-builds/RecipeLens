@@ -129,6 +129,20 @@ const CUP_TO_GRAMS = {
 const FOOD_ITEM_WEIGHTS = {
   'egg': 50,
   'eggs': 50,
+  'yolk': 17,
+  'yolks': 17,
+  'egg yolk': 17,
+  'egg yolks': 17,
+  'large yolk': 17,
+  'large yolks': 17,
+
+  // Bacon (raw slice)
+  'bacon': 28,
+  'bacon slice': 28,
+  'bacon slices': 28,
+  'slice of bacon': 28,
+  'bacon strip': 28,
+  'bacon strips': 28,
   
   // Bread
   'bread': 30,
