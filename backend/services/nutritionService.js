@@ -290,7 +290,24 @@ function convertToGrams(quantity, unit, ingredientName) {
  * @return {Object} - calculated nutrition
  */
 
+/**
+ * Seasonings with no real amount ("Salt", "salt to taste") sometimes come back
+ * from the AI as "1 piece" or "1 whole". Treat those as a pinch so they are
+ * not calculated as 100g, and so the table shows "1 pinch".
+ * Bare "pepper" + "piece" is skipped: it could mean a whole bell/chili pepper.
+ */
+function normalizeSeasoningUnit(ingredient) {
+  const unit = (ingredient.unit || '').toLowerCase();
+  const name = (ingredient.ingredient || '').toLowerCase();
+  if (!SEASONINGS.includes(name)) return ingredient;
+  if (unit === 'whole' || unit === '' || (unit === 'piece' && name !== 'pepper')) {
+    return { ...ingredient, quantity: 1, unit: 'pinch' };
+  }
+  return ingredient;
+}
+
 function calculateIngredientNutrition(ingredient, foodData) {
+  ingredient = normalizeSeasoningUnit(ingredient);
   const grams = convertToGrams(
     ingredient.quantity, 
     ingredient.unit,
