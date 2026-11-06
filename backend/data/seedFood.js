@@ -1652,6 +1652,83 @@ const foods = [
     transFat: 0.9
   }
 },
+  {
+    "name": "Bacon",
+    "commonNames": [
+      "bacon",
+      "bacons",
+      "bacon strips",
+      "sliced bacon",
+      "streaky bacon",
+      "pancetta"
+    ],
+    "category": "protein",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 393,
+      "protein": 13.7,
+      "carbs": 0,
+      "fat": 37.1,
+      "fiber": 0,
+      "sugar": 0.4,
+      "sodium": 751,
+      "cholesterol": 66,
+      "saturatedFat": 12.6,
+      "transFat": 0.2
+    }
+  },
+  {
+    "name": "Egg Yolk",
+    "commonNames": [
+      "egg yolk",
+      "egg yolks",
+      "yolk",
+      "yolks",
+      "large yolk",
+      "large yolks"
+    ],
+    "category": "protein",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 322,
+      "protein": 15.9,
+      "carbs": 3.6,
+      "fat": 26.5,
+      "fiber": 0,
+      "sugar": 0.6,
+      "sodium": 48,
+      "cholesterol": 1085,
+      "saturatedFat": 9.6,
+      "transFat": 0
+    }
+  },
+  {
+    "name": "Pecorino Romano",
+    "commonNames": [
+      "pecorino romano",
+      "pecorino",
+      "romano",
+      "romano cheese",
+      "pecorino cheese"
+    ],
+    "category": "dairy",
+    "servingSize": 100,
+    "servingUnit": "g",
+    "nutrition": {
+      "calories": 387,
+      "protein": 31.8,
+      "carbs": 3.6,
+      "fat": 26.9,
+      "fiber": 0,
+      "sugar": 0.7,
+      "sodium": 1433,
+      "cholesterol": 104,
+      "saturatedFat": 17.1,
+      "transFat": 0
+    }
+  },
 
 ];
 

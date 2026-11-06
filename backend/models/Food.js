@@ -9,7 +9,7 @@ const foodSchema = new mongoose.Schema({
   commonNames: [String],
   category: {
     type: String,
-    enum:['protein', 'grain', 'vegetable', 'fruit', 'dairy', 'fat', 'sweetener', 'spice', 'other'],
+    enum:['protein', 'grain', 'vegetable', 'fruit', 'dairy', 'fat', 'sweetener', 'spice', 'seasoning', 'other'],
     default: 'other'
   },
   servingSize: {
