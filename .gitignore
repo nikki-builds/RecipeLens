@@ -1,3 +1,6 @@
 
 # Raw screen recordings (large, not needed in the repo)
 *.mov
+
+# macOS Finder metadata
+.DS_Store
